@@ -1,0 +1,41 @@
+COCO-Anotator によるアノテーションデータを活用
+
+COCO-Anotatoerでjsonデータエクスポート
+\\wsl.localhost\Ubuntu-22.04\home\yoshi\coco-annotator\datasets\Tomato\.exports
+
+１．データセット登録（tmt_reg）
+00  231012  "tomato"データセットにjsonデータセットを登録
+01  231012  jsonデータセットを更新
+
+-------------------------------------------------------------------------------------------
+２．ト－レーニング（tmt_train）
+00  231012  訓練コード
+01  231012  "tomato"データセットのアノテーション画像を表示
+            if __name__ == '__main__':　追記しエラー回避
+            訓練データ出力（model_final.pth）
+02  231013  学習データ更新
+03  231013  学習データ更新
+04  231013  学習データ更新
+
+10  231013  config_file = 'COCO-PanopticSegmentation/panoptic_fpn_R_101_3x.yaml'に変更
+            動作せず
+
+
+
+-------------------------------------------------------------------------------------------
+３．テスト（tmt_tst）
+00  231012  model_final.pthをウェイトに設定
+            インスタンスセグメンテーション処理
+01  231012  画像にverを表示
+            configを編集
+02  231013  Visualizerでdraw_instance_predictionsを使わずbox,maskを個別に描画
+03  231013  Visualizerを改変して矩形非表示に設定（boxes = None）
+            学習データ更新
+04  231013  学習データ更新
+test231016  元画像表示用
+05  231016  
+
+
+
+10  231013  config_file = 'COCO-PanopticSegmentation/panoptic_fpn_R_101_3x.yaml'に変更
+            動作せず

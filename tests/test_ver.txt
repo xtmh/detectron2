@@ -1,0 +1,23 @@
+Detectron2をWindowsに実装（https://qiita.com/techstrom/items/0b00c0fd0ab0b1519a98）
+
+test
+01  231005  test_window.pyのコピー
+            torchをCUDAに合わせて再インストール（https://pytorch.org/get-started/previous-versions/）
+            KMP_DUPLICATE_LIB_OK=TRUE 環境変数を設定して動作確認
+
+02  231005  ローカルファイルを処理
+
+03  230605  https://www.ushiji.online/detectron2 を参考にテスト
+            ponoptic segmentation を実装
+
+04  231005  Visualizer()のinstance_modeをテスト
+
+05  231006  x   ponoptic segmentation を実装（人検出）
+
+06  231006  pandasでスコアと座標出力       
+
+07  231010  Visualizerを変更
+
+08  231010  矩形エリア検出と描画
+
+09  231010  人だけ検出し輪郭描画
