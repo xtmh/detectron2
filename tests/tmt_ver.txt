@@ -16,6 +16,7 @@ COCO-Anotatoerでjsonデータエクスポート
 02  231013  学習データ更新
 03  231013  学習データ更新
 04  231013  学習データ更新
+05  231016  MAX_ITERを300->600に変更
 
 10  231013  config_file = 'COCO-PanopticSegmentation/panoptic_fpn_R_101_3x.yaml'に変更
             動作せず
@@ -32,8 +33,11 @@ COCO-Anotatoerでjsonデータエクスポート
 03  231013  Visualizerを改変して矩形非表示に設定（boxes = None）
             学習データ更新
 04  231013  学習データ更新
+    231016  矩形描画を戻す
 test231016  元画像表示用
-05  231016  
+05  231016  矩形のみ描画
+06  231016  矩形とマスクを描画
+
 
 
 

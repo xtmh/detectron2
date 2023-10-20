@@ -10,7 +10,7 @@ from detectron2.engine.defaults import DefaultPredictor
 from detectron2.layers import rotated_boxes
 from detectron2.utils.visualizer import ColorMode, Visualizer
 
-ver=2
+ver = 6
 
 #データセット登録
 #register_coco_instances("tomato", {}, "C:\\Users\\yoshi\\detectron2\\tests\\Tomato\\coco-1697077268.6923862.json", "C:\\Users\\yoshi\\detectron2\\tests\\tomato")
@@ -52,18 +52,22 @@ for name in ["s-IMG_2973","s-IMG_3064", "s-IMG_3065", "s-IMG_3066"]:
                    instance_mode=ColorMode.IMAGE_BW,
                    scale=1.0
     )
-    v = v.draw_instance_predictions(outputs["instances"].to("cpu"))
+
+    #v = v.draw_instance_predictions(outputs["instances"].to("cpu"))
     #
     # Boxes
-    #for box in outputs["instances"].pred_boxes.to('cpu'):
-    #    v.draw_box(box) 
+    for box in outputs["instances"].pred_boxes.to('cpu'):
+        v.draw_box(box, edge_color="r")
+        #v.draw_text(str(box[:2].numpy()), tuple(box[:2].numpy()))  
+        v.draw_text(str(box[:2].numpy()), tuple(box[:2].numpy()))  
     # Masks
-    #for mask in outputs["instances"].pred_masks.to('cpu'):
-    #    v.draw_soft_mask(mask)
-    #num_instances = len(box)
+    for mask in outputs["instances"].pred_masks.to('cpu'):
+        v.draw_soft_mask(mask)
+    #num_instances = len(mask)
+    #print(num_instances)
     #for lbl in num_instances:
     #    v.draw_rotated_box_with_label(lbl)
-    #v = v.get_output()
+    v = v.get_output()
 
     #結果画像表示
     cv2.imshow(f"{ver}_{name}.jpg", v.get_image()[:, :, ::-1])

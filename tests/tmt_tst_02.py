@@ -38,8 +38,6 @@ cfg.MODEL.WEIGHTS = os.path.join(cfg.OUTPUT_DIR, "model_final.pth") #生成さ�
 cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.05
 cfg.MODEL.ROI_HEADS.NMS_THRESH_TEST  = 0.09
 predictor = DefaultPredictor(cfg)
-#
-predictor.cfg
 
 #検出テスト
 for name in ["s-IMG_2973","s-IMG_3064", "s-IMG_3065", "s-IMG_3066"]:    
