@@ -84,6 +84,6 @@ for i in range(len(img_list)):
     out_path = otdir + img_name
     cv2.imshow(f"{ver}_{img_name}.jpg", v.get_image()[:, :, ::-1])  #   v : VisImageを表示
     #cv2.imwrite(str(out_path), v.get_image()[:, :, ::-1])
-    v.save(str(out_path))
+    v.save(str(out_path))   
 
 cv2.waitKey(0)
