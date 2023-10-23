@@ -10,7 +10,7 @@ from detectron2.engine.defaults import DefaultPredictor
 from detectron2.layers import rotated_boxes
 from detectron2.utils.visualizer import ColorMode, Visualizer
 
-ver = 6
+ver = 7
 
 #データセット登録
 #register_coco_instances("tomato", {}, "C:\\Users\\yoshi\\detectron2\\tests\\Tomato\\coco-1697077268.6923862.json", "C:\\Users\\yoshi\\detectron2\\tests\\tomato")
@@ -42,6 +42,7 @@ predictor = DefaultPredictor(cfg)
 
 #検出テスト
 for name in ["s-IMG_2973","s-IMG_3064", "s-IMG_3065", "s-IMG_3066"]:    
+#for name in ["s-IMG_2973"]:
     im = cv2.imread(f"./tests/tomato/test/{name}.jpg")
     #print(im.shape) #(960, 1280, 3)
     outputs = predictor(im)
@@ -56,18 +57,28 @@ for name in ["s-IMG_2973","s-IMG_3064", "s-IMG_3065", "s-IMG_3066"]:
     #v = v.draw_instance_predictions(outputs["instances"].to("cpu"))
     #
     # Boxes
-    for box in outputs["instances"].pred_boxes.to('cpu'):
-        v.draw_box(box, edge_color="r")
+    #nn = 0
+    #for box in outputs["instances"].pred_boxes.to('cpu'):
+    #    v.draw_box(box, edge_color="b")
         #v.draw_text(str(box[:2].numpy()), tuple(box[:2].numpy()))  
-        v.draw_text(str(box[:2].numpy()), tuple(box[:2].numpy()))  
+        #v.draw_text(str(box[:2].numpy()), tuple(box[:2].numpy()))
+    #    nn=nn+1
+    #print("nn=", nn)    #93
+    
     # Masks
     for mask in outputs["instances"].pred_masks.to('cpu'):
         v.draw_soft_mask(mask)
-    #num_instances = len(mask)
-    #print(num_instances)
-    #for lbl in num_instances:
-    #    v.draw_rotated_box_with_label(lbl)
+
+    # class毎の検出数出力
+    pd = outputs["instances"].pred_classes.to("cpu")
+    xnum = pd.bincount()
+    stnum = ("leaf({}),  board({}), tomato({})".format(xnum[0], xnum[1], xnum[2]))
+    v.draw_text(stnum, (0,0), horizontal_alignment="left")
     v = v.get_output()
+
+    #print("[0]={},  [1]={}, [2]={}".format(xx[0], xx[1], xx[2]))
+    #print("leaf({}),  board({}), tomato({})".format(xx[0], xx[1], xx[2]))
+    print(stnum)
 
     #結果画像表示
     cv2.imshow(f"{ver}_{name}.jpg", v.get_image()[:, :, ::-1])

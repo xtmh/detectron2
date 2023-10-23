@@ -21,7 +21,7 @@ from .colormap import random_color
 
 logger = logging.getLogger(__name__)
 
-__all__ = ["ColorMode", "VisImage", "Visualizer"]
+__all__ = ["ColorMode", "VisImage", "Visualizer"]   #   *でimportするモジュールを指定
 
 
 _SMALL_OBJECT_AREA_THRESH = 1000
@@ -256,6 +256,7 @@ def _create_text_labels(classes, scores, class_names, is_crowd=None):
 
 
 class VisImage:
+    #コンストラクタ
     def __init__(self, img, scale=1.0):
         """
         Args:
@@ -381,6 +382,7 @@ class Visualizer:
         self._instance_mode = instance_mode
         self.keypoint_threshold = _KEYPOINT_THRESHOLD
 
+    #一括処理（インスタンスセグメンテーション）
     def draw_instance_predictions(self, predictions):
         """
         Draw instance-level prediction results on an image.
@@ -393,8 +395,8 @@ class Visualizer:
         Returns:
             output (VisImage): image object with visualizations.
         """
-        boxes = predictions.pred_boxes if predictions.has("pred_boxes") else None
-        #boxes = None
+        #boxes = predictions.pred_boxes if predictions.has("pred_boxes") else None
+        boxes = None
         scores = predictions.scores if predictions.has("scores") else None
         classes = predictions.pred_classes.tolist() if predictions.has("pred_classes") else None
         #label出力
@@ -436,6 +438,7 @@ class Visualizer:
         )
         return self.output
 
+    #一括処理（セマンティックセグメンテーション）
     def draw_sem_seg(self, sem_seg, area_threshold=None, alpha=0.8):
         """
         Draw semantic segmentation predictions/labels.
@@ -472,6 +475,7 @@ class Visualizer:
             )
         return self.output
 
+    #一括処理（パノプティックセグメンテーション）
     def draw_panoptic_seg(self, panoptic_seg, segments_info, area_threshold=None, alpha=0.7):
         """
         Draw panoptic prediction annotations or results.
